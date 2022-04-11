@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   let haystack = []
+       haystack[17] = "Hello, this out"
+
+
+    for ( let i = 0; i<20; ++i){
+        if(haystack[i] === haystack[17]){
+            document.write( " - " + haystack[i])
+            break
+        }else {
+            document.write(i + ",")
+        }
+    }
+</script>
+</body>
+</html>

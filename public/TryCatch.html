@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    try {
+
+        alert('Начало блока try');  // (1) <--
+
+        lalala; // ошибка, переменная не определена!
+
+        alert('Конец блока try');  // (2)
+
+    } catch(e) {
+
+        alert('Ошибка ' + e.name + ":" + e.message + "\n" + e.stack); // (3) <--
+
+    }
+
+    alert("Потом код продолжит выполнение...");
+    // var data = '{"name":"Вася", "age": 30}'; // строка с данными, полученная с сервера
+    //
+    // var user = JSON.parse(data); // преобразовали строку в объект
+    //
+    // // теперь user -- это JS-объект с данными из строки
+    // alert( user.name ); // Вася
+    // alert( user.age ); // 30
+</script>
+</body>
+</html>

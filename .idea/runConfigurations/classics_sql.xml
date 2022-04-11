@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="classics.sql" type="DatabaseScript" editBeforeRun="true" nameIsGenerated="true">
+    <script-mode>FILE</script-mode>
+    <data-source id="84c6062e-9999-417d-9b26-ee06f3de1854" />
+    <method v="2" />
+  </configuration>
+</component>

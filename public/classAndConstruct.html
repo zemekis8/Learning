@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function User( forename, username, password ){
+        this.forename = forename
+        this.username = username
+        this.password = password
+        this.displayShow = displayShow
+    }
+    function displayShow(){
+        document.write("Имя: " + this.forename + "<br>")
+        document.write("Пользовательское имя: " + this.username + "<br>")
+        document.write("Пароль: " + this.password + "<br>")
+    }
+    let test = new User( "Oleg", "Vasy", 12345)
+    test.displayShow()
+    test.forename = "qwewqeqwes1"
+    document.write(test.forename)
+    function ice(){
+        document.write( "<br>" + test.forename )
+    }
+    ice()
+    test.age = 21
+    document.write(test.age)
+    User.prototype.pop = "AAAAAAAAA"
+    document.write( "<br>" + test.pop)
+    test.a()
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // или можно просто саму функцию (без имени присвоить , это и будет анонимная функция)
+
+    onerror = errorHand
+    document.writ("Добро пожаловать на этот сайт!") // Преднамеренная ошибка
+    function errorHand(message, url, line)
+    {
+        out = "К сожалению, обнаружена ошибка.\n\n";
+        out += "Ошибка: " + message + "\n";
+        out += "URL: " + url + "\n";
+        out += "Строка: " + line + "\n\n";
+        out += "Щелкните на кнопке OK для продолжения работы.\n\n";
+        alert(out);
+        return true;
+    }
+
+</script>
+</body>
+</html>

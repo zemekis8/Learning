@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    array = ["a", "s", "t", "e", "n", "z", "i"];
+    document.write(array.sort().reverse() + "<br>");
+    // Сортировка по алфавиту в обратном порядке
+    sports = ["Футбол", "Теннис", "Бейсбол", "Хоккей"]
+    sports.sort().reverse()
+    document.write(sports + "<br>")
+    // Сортировка чисел по возрастанию
+    numbers = [7, 23, 6, 74]
+    numbers.sort(function(a,b){
+        return a - b
+    })
+    document.write(numbers + "<br>")
+    // Сортировка чисел по убыванию
+    numbers = [7, 23, 6, 74]
+    numbers.sort(function(a,b){
+        return b - a
+    })
+    document.write(numbers + "<br>")
+</script>
+</body>
+</html>

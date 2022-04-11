@@ -1,0 +1,79 @@
+
+# Файл docker-compose должен начинаться с тега версии.
+# Мы используем "3" так как это - самая свежая версия на момент написания этого кода.
+
+#https://habr.com/ru/company/ruvds/blog/450312/ - сайт так же хорошо обьяснеет все файлы
+version: '3'
+# Следует учитывать, что docker-composes работает с сервисами.
+# 1 сервис = 1 контейнер.
+# Сервисом может быть клиент, сервер, сервер баз данных...
+# Раздел, в котором будут описаны сервисы, начинается с 'services'.
+services:
+  #создаем контейнер (сервис)
+  nginx-container:
+    #Ключевое слово "build" позволяет задать
+    # путь к файлу Dockerfile, который нужно использовать для создания образа,
+    # который позволит запустить сервис.
+    build:
+      context: ./docker #КАТАЛОГ ГДЕ НАХОДТЬСЯ ДОКЕР КОНФИГУРАЦИИ
+      dockerfile: nginx.dockerfile # путь к файлу докерфайла
+    volumes: # ./ - папка где мы именно находимся (относительно файла) , /app - рабочая директория (  в докере находятся файлы ) т.е и в ./ и /app находятся файлы(настройки) , а когда
+      # запускаем контейнер эти файлы находятся в /app в САМОМ КОНТЕЙНЕРЕ
+      - ./:/app
+      # Ключевое слово 'depends_on' позволяет указывать, должен ли сервис,
+      # прежде чем запуститься, ждать, когда будут готовы к работе другие сервисы.
+    depends_on:
+      - php-fpm-container
+      # порт , он нужен для того чтобы приложение смогло обьедениться с хром и показать сайт
+    ports:
+      - "8080:80"
+      # PHP-FPM (FastCGI Process Manager) — это альтернативная реализация режима FastCGI в PHP. В связке
+      # с nginx обеспечивает более высокую скорость обработки запросов, чем связка nginx + Apache, доступная по умолчанию.
+      #php-fmp -  работает через браузер ( обрабатывает запрос от nginx ) , и отдает результат в обратном направлении через nginx ( по сути то что видим через браузер этот php-fmp выполняет )
+  php-fpm-container:
+    build:
+      context: ./docker
+      dockerfile: php-fpm.dockerfile
+    #volume — это просто папка хоста, примонтированная к файловой системе контейнера. (обьяснить нужно)
+    environment:
+      - XDEBUG_SESSION=PHPSTORM
+    volumes:
+      - ./:/app
+      #php-cli-интерфейс командной строки. CLI позволяет запускать программы на PHP не через привычную нам клиент-серверную архитектуру, а как простые программы в командной строке
+
+  php-cli-container:
+    build:
+      #context - где лежать dockerfile
+      context: ./docker
+      #dockerfile-какой именно dockerfile нужно использовать
+      dockerfile: php-cli.dockerfile
+    volumes:
+      - ./:/app
+      - composer:/root/.composer/cace
+
+  mysql-container:
+    container_name: mysql-container
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'publication'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'Oleg'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'pon34gs5'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'Pon34gs5'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      #1-ВНЕШНИЙ 2-ВНУТРЕНИЙ
+      - "3306:3306"
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  composer:
+  my-db:
+

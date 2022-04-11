@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+ //    function User( forename, username, password ){
+ //        this.forename = forename;
+ //        this.username = username;
+ //        this.password = password;
+ //        console.log(this)
+ //    }
+ //   User.prototype.displayShow= function (){
+ //        document.write("Имя: " + this.forename + "<br>");
+ //        document.write("Пользовательское имя: " + this.username + "<br>");
+ //        document.write("Пароль: " + this.password + "<br>");
+ //        // console.log("этот this")
+ //        // console.log(this)
+ //    }
+ // let test = new User( "1", "2", "3" );
+ //    // console.log(this)
+ //    test.displayShow();
+ //    test.age = 21;
+ //    document.write(test.age);
+ //    User.prototype.pop = "test";
+ //    document.write( "<br>" + test.pop);
+ String.prototype.trim = function()
+ {
+     return this.replace(/^\s+|\s+$/g, '') //  это регулярное выражение
+ }
+ document.write("     Пожалуйста, избавьте меня от лишних пробелов        ".trim() + console.log(this))
+
+
+
+</script>
+</body>
+</html>
