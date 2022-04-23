@@ -39,94 +39,81 @@ echo <<<_END
  }
  </style>
  <script>
- function validate(form)
- {
- fail = validateForename(form.forename.value)
- fail += validateSurname(form.surname.value)
- fail += validateUsername(form.username.value)
- fail += validatePassword(form.password.value)
- fail += validateAge(form.age.value)
- fail += validateEmail(form.email.value)
- if (fail == "") return true
- else { alert(fail); return false }
- }
- function validateForename(field)
- {
- return (field == "") ? "Не введено имя.\n" : ""
- }
- function validateSurname(field)
- {
- return (field == "") ? "Не введена фамилия.\n" : ""
- }
- function validateUsername(field)
- {
- if (field == "") return "Не введено имя пользователя.\n"
- else if (field.length < 5)
- return "В имени пользователя должно быть не менее 5 символов.\n"
- else if (/[^a-zA-Z0-9_-]/.test(field))
- return "В имени пользователя разрешены только a-z, A-Z, 0-9, - и _.\n"
- return ""
- }
- function validatePassword(field)
- {
- if (field == "") return "Не введен пароль.\n"
- else if (field.length < 6)
- return "В пароле должно быть не менее 6 символов.\n"
- else if (!/[a-z]/.test(field) || ! /[A-Z]/.test(field) ||
- ! /[0-9]/.test(field))
- return "Пароль требует 1 символа из каждого набора a-z, A-Z и 0-9.\n"
- return ""
- }
- function validateAge(field)
- {
- if (isNaN(field)) return "Не введен возраст.\n"
- else if (field < 18 || field > 110)
- return "Возраст должен быть между 18 и 110.\n"
- return ""
- }
- function validateEmail(field)
- {
- if (field == "") return "Не введен адрес электронной почты.\n"
- else if (!((field.indexOf(".") > 0) &&
- (field.indexOf("@") > 0)) ||
- /[^a-zA-Z0-9.@_-]/.test(field))
- return "Электронный адрес имеет неверный формат.\n"
- return ""
- }
+ function validate(form){
+            let fail = validateForename(form.forename.value);
+            fail += validateSurname(form.surname.value);
+            fail += validateUsername(form.username.value);
+            fail += validatePassword(form.password.value);
+            fail += validateAge(form.age.value);
+            fail += validateEmail(form.email.value);
+            if (fail == "") {
+                return true;
+            }
+            else {
+                alert(fail);
+                return false;
+            }
+        }
+        function validateForename(fail){
+            return fail == "" ?  "Не введено Имя " : "" ;
+        }
+        function validateSurname(fail){
+            return fail == "" ? "Не введена Фамилия " : "" ;
+        }
+        function validateUsername(fail){
+            if (fail == ""){
+                return "Не введено Имя пользователя " ;
+            } else if(fail.length < 2){
+                return "Имя пользователя слишком короткое " ;
+            } else if(/[^a-zA-Z0-9_-]/.test(fail)){
+                return "Строка-Имя пользователя, имеет запрещенные символы ";
+            }
+            return "";
+        }
+        function validatePassword(fail){
+            if (fail == ""){
+                return "Не введен пароль ";
+            }else if(fail.length < 7 ){
+                return "Пароль слишком которкий ";
+            }else if(!/[a-z]/.test(fail) || ! /[A-Z]/.test(fail) || !/[0-9]/.test(fail)){
+                return "Строка Пароль, имеет запрещенные символы ";
+            }
+            return "";
+        }
+        function validateAge(fail){
+            if (fail == "" || isNaN(fail)){
+                return "Не введен возвраст ";
+            }else if(fail < 18 || fail > 110){
+                return "Неверно введен возвсраст ";
+            }
+            return "";
+        }
+        function validateEmail(fail) {
+            if (fail == "") return "Не введен адрес электронной почты."
+            else if (!((fail.indexOf(".") > 0) &&
+                    (fail.indexOf("@") > 0)) ||
+                /[^a-zA-Z0-9.@_-]/.test(fail))
+                return "Электронный адрес имеет неверный формат."
+            return ""
+        }
  </script>
  </head>
  <body>
-<table border="0" cellpadding="2" cellspacing="5"
- bgcolor="#eeeeee">
- <th colspan="2" align="center">Регистрационная форма</th>
- <tr><td colspan="2">К сожалению, в вашей форме <br>
-найдены следующие ошибки: <p><font color=red
- size=1><i>$fail</i></font></p>
- </td></tr>
+    <table border="0" cellpadding="2" cellspacing="5" bgcolor="#eeeeee">
+        <th colspan="2" align="center">Регистрационная форма</th>
+       
 
-<form method="post" action="adduser.php" onSubmit="return
- validate(this)">
- <tr><td>Имя</td>
- <td><input type="text" maxlength="32" name="forename"
- value="forename">
- </td></tr><tr><td>Фамилия</td>
- <td><input type="text" maxlength="32" name="surname"
- value="surname">
- </td></tr><tr><td>Пользовательское имя</td>
- <td><input type="text" maxlength="16" name="username"
- value="username">
- </td></tr><tr><td>Пароль</td>
- <td><input type="text" maxlength="12" name="password"
- value="password">
- </td></tr><tr><td>Возраст</td>
- <td><input type="text" maxlength="3" name="age" value="age">
- </td></tr><tr><td>Электронный адрес</td>
- <td><input type="text" maxlength="64" name="email"
- value="email">
- </td></tr><tr><td colspan="2" align="center"><input
- type="submit" value="Зарегистрироваться"></td></tr>
- </form>
- </table>
+        <form method="post" action="adduser.php" onsubmit="return validate(this)">
+            <tr><td colspan="2">К сожалению, в вашей форме <br> найдены следующие ошибки: <p><font color=red size=1><i>$fail</i></p></td></tr>
+            <tr><td>Имя</td> <td><input type="text" maxlength="32" name="forename" value="forename"></td></tr>
+            <tr><td>Фамилия</td> <td><input type="text" maxlength="32" name="surname" value="surname"></td></tr>
+            <tr><td>Пользовательское имя</td><td><input type="text" maxlength="16" name="username" value="username"></td></tr>
+            <tr><td>Пароль</td> <td><input type="text" maxlength="12"name="password" value="password"></td></tr>
+            <tr><td>Возраст</td> <td><input type="text" maxlength="3" name="age" value="age"></td></tr>
+            <tr><td>Электронный адрес</td> <td><input type="text" maxlength="64" name="email" value="email"></td></tr>
+            <tr><td colspan="2" align="center"> <input type="submit" value="Зарегистрироваться"></td></tr>
+        </form>
+    </table>
  </body>
  </html>
 _END;
